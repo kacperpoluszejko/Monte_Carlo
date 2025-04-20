@@ -10,4 +10,13 @@ Każdy projekt zawiera:
 
 ---
 
-## 📁 Struktura repozytorium
+## 📌 Tematy projektów 
+
+1. Rozkład Bernoulliego, estymacja momentów rozkładu
+2. Generator o zadanym rozkładzie 1D
+3. Generatory liczb pseudolosowych - rozkłady skorelowane w 2D
+4. Proste całkownie z szacowaniem wariancji
+5. Całkowanie metodą warstwową - redukcja wariancji
+6. Symulacja dyfuzji i absorpcji w układzie zakmniętym
+
+
