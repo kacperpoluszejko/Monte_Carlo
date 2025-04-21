@@ -148,48 +148,48 @@ int main()
     double dx2 = (b2 - a2)/M;
     double dx3 = (b3 - a3)/M;
 
-    // Wynik C1 = {0,0,0};
-    // Wynik C2 = {0,0,0};
-    // Wynik C3 = {0,0,0};
+    Wynik C1 = {0,0,0};
+    Wynik C2 = {0,0,0};
+    Wynik C3 = {0,0,0};
 
-    // for (int i=0; i<M; i++)
-    // {
-    //     Wynik C_1m = calc_C1(a1+dx1*i, a1+(i+1)*dx1, Nm);
-    //     Wynik C_2m = calc_C2(a2+dx2*i, a2+(i+1)*dx2, Nm);
-    //     Wynik C_3m = calc_C3(a3+dx3*i, a3+(i+1)*dx3, Nm);
+    for (int i=0; i<M; i++)
+    {
+        Wynik C_1m = calc_C1(a1+dx1*i, a1+(i+1)*dx1, Nm);
+        Wynik C_2m = calc_C2(a2+dx2*i, a2+(i+1)*dx2, Nm);
+        Wynik C_3m = calc_C3(a3+dx3*i, a3+(i+1)*dx3, Nm);
 
-    //     C1.srednia += C_1m.srednia*pm;
-    //     C1.wariancja +=C_1m.wariancja*pm*pm;
-    //     C2.srednia += C_2m.srednia*pm;
-    //     C2.wariancja +=C_2m.wariancja*pm*pm;
-    //     C3.srednia += C_3m.srednia*pm;
-    //     C3.wariancja +=C_3m.wariancja*pm*pm;
-    // }
+        C1.srednia += C_1m.srednia*pm;
+        C1.wariancja +=C_1m.wariancja*pm*pm;
+        C2.srednia += C_2m.srednia*pm;
+        C2.wariancja +=C_2m.wariancja*pm*pm;
+        C3.srednia += C_3m.srednia*pm;
+        C3.wariancja +=C_3m.wariancja*pm*pm;
+    }
 
-    // C1.error = sqrt(C1.wariancja)/C1.srednia;
-    // C2.error = sqrt(C2.wariancja)/C2.srednia;
-    // C3.error = sqrt(C3.wariancja)/C3.srednia;
+    C1.error = sqrt(C1.wariancja)/C1.srednia;
+    C2.error = sqrt(C2.wariancja)/C2.srednia;
+    C3.error = sqrt(C3.wariancja)/C3.srednia;
 
-    // cout<<C1.srednia<<" "<< sqrt(C1.wariancja)<<" "<<C1.error<<endl;
-    // cout<<C2.srednia<<" "<< sqrt(C2.wariancja)<<" "<<C2.error<<endl;
-    // cout<<C3.srednia<<" "<< sqrt(C3.wariancja)<<" "<<C3.error<<endl;
+    cout<<C1.srednia<<" "<< sqrt(C1.wariancja)<<" "<<C1.error<<endl;
+    cout<<C2.srednia<<" "<< sqrt(C2.wariancja)<<" "<<C2.error<<endl;
+    cout<<C3.srednia<<" "<< sqrt(C3.wariancja)<<" "<<C3.error<<endl;
 
-    // vector<double> random(N);
+    vector<double> random(N);
 
-    // ofstream plik2;
-    // plik2.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_5\\monte_carlo_5_2.txt");
+    ofstream plik2;
+    plik2.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_5\\monte_carlo_5_2.txt");
 
-    // for (int i = 0; i<M; i++)
-    // {
-    //     for (int j = 0; j<Nm; j++)
-    //     {
-    //         double value = a1+dx1*i + dx1*rn.get_random();
-    //         plik2<<value<<" ";
-    //     }
-    // }
+    for (int i = 0; i<M; i++)
+    {
+        for (int j = 0; j<Nm; j++)
+        {
+            double value = a1+dx1*i + dx1*rn.get_random();
+            plik2<<value<<" ";
+        }
+    }
 
 
-
+    //kom
     //Metoda warstwowa
 
     double sigma_m_table[M];
