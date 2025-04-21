@@ -12,11 +12,7 @@ Każdy projekt zawiera:
 
 ## 📌 Tematy projektów 
 
-1. Rozkład Bernoulliego, estymacja momentów rozkładu
-2. Generator o zadanym rozkładzie 1D
-3. Generatory liczb pseudolosowych - rozkłady skorelowane w 2D
-4. Proste całkownie z szacowaniem wariancji
-5. Całkowanie metodą warstwową - redukcja wariancji
-6. Symulacja dyfuzji i absorpcji w układzie zakmniętym
-
-
+1. Wyznaczanie stanów jednoelektronowych w kropkach kwantowych za pomocą metody Galerkina
+2. Wyznaczanie stanów dwuelektronowych metodą czasu urojonego i Hartree-Focka
+3. Ewolucja stanów elektronowych w podwójnej kropce kwantowej: metoda Crancka-Nicolsona i Askara-Cakmaka
+4. Symulacje transportu elektronowego w układach 1D. Dioda rezonansowo-tunelowa i kwantowy kontakt punktowy. Metoda macierzy transferu
