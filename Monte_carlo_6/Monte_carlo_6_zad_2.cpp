@@ -168,7 +168,7 @@ int main(){
     double X[N_max] = {0}; // Tablica położeń x
     double Y[N_max] = {0}; // Tablica położeń y
     int theta[N_max] = {0}; // Tablica aktywnoścu
-    double dt = 0.1, t_max = 100;
+    double dt = 0.1, t_max = 1000;
     int Nt = t_max/dt; // liczba kroków czasowych
     double sigma = sqrt(2*D*dt); // odchylenie rozkładu nromalnego
     double omega = 100; // Aktywność
@@ -221,7 +221,7 @@ int main(){
     }
 
     ofstream plik1;
-    plik1.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_6\\monte_carlo_6_zad_2_t_100.txt");
+    plik1.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_6\\monte_carlo_6_zad_2_t_1000.txt");
 
     for (int i =0; i<N_max; i++)
     {
