@@ -18,3 +18,5 @@ Każdy projekt zawiera:
  4. Proste całkownie z szacowaniem wariancji
  5. Całkowanie metodą warstwową - redukcja wariancji
  6. Symulacja dyfuzji i absorpcji w układzie zakmniętym
+ 7. Równanie typu Master: algorytm Gillespie
+ 8. Modelowanie struktury fullerenów metodą symulowanego wyżarzania
