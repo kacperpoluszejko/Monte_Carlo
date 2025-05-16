@@ -37,8 +37,15 @@ struct atom
     double fi;
 };
 
+const double angstrom_to_meter = 1e-10;
+const double eV_to_joule = 1.602e-19;
+
 const double c0 = 19, d0 = 2.5, a0 = 0.011304, delta = 0.80460, S = 1.29;
-const double R0 = 1.315, R1 = 1.7, R2 = 2.0;
+const double R0 = 1.315 * angstrom_to_meter;
+const double R1 = 1.70 * angstrom_to_meter;
+const double R2 = 2.0 * angstrom_to_meter;
+const double De = 6.325 * eV_to_joule;
+const double lambda = 1.5 / angstrom_to_meter;
 const int  N=60;
 
 
@@ -76,18 +83,70 @@ double calc_f_cut(double r)
 
 }
 
-double calc_B_ij(atom atoms[N], atom i, atom j)
+double calc_bar_B_ij(atom atoms[N], atom i, atom j)
 {
     double zeta_ij = 0;
     for (int it = 0; it<N; it++)
     {   atom k = atoms[it];
-        atom r_ik = {k.x - i.x, k.y - i.y, k.z - i.z, 0, 0, 0};
-        convertToSpherical(r_ik);
-        zeta_ij += calc_f_cut(r_ik.r)*calc_g_theta_ijk(i, j, k);
+        if (i.r != k.r && j.r != k.r)
+        {
+            atom r_ik = {k.x - i.x, k.y - i.y, k.z - i.z, 0, 0, 0};
+            convertToSpherical(r_ik);
+            zeta_ij += calc_f_cut(r_ik.r)*calc_g_theta_ijk(i, j, k);
+        }
+    }
+
+    double zeta_ji = 0;
+    for (int it = 0; it<N; it++)
+    {   atom k = atoms[it];
+        if (i.r != k.r && j.r != k.r)
+        {
+            atom r_jk = {k.x - j.x, k.y - j.y, k.z - j.z, 0, 0, 0};
+            convertToSpherical(r_jk);
+            zeta_ji += calc_f_cut(r_jk.r)*calc_g_theta_ijk(j, i, k);
+        }
     }
 
     double B_ij = pow(1+zeta_ij, -delta);
-    return B_ij;
+    double B_ji = pow(1+zeta_ji, -delta);
+
+    return (B_ij + B_ji)/2;
+}
+
+double calc_V_R(double r)
+{
+    double VR = De/(S-1)*exp(-sqrt(2*S)*(r-R0));
+    return VR;
+}
+
+double calc_V_A(double r)
+{
+    double VA = De*S/(S-1)*exp(-sqrt(2/S)*(r-R0));
+    return VA;
+}
+
+double calc_V_i(atom atoms[N], atom i)
+{
+    double Vi = 0;
+    for (int it = 0; it<N; it++)
+    {
+        atom j = atoms[it];
+        double rij = sqrt(pow(j.x - i.x, 2) + pow(j.y - i.y, 2) + pow(j.z - i.z, 2));
+        Vi += calc_f_cut(rij)*(calc_V_R(rij) - calc_bar_B_ij(atoms, i, j)*calc_V_A(rij));
+    }
+
+    return Vi;
+}
+
+double calc_total_V(atom atoms[N])
+{
+    double V_total = 0;
+     for (int it = 0; it<N; it++)
+    {
+        atom i = atoms[it];
+        V_total += calc_V_i(atoms, i);
+    }
+    return V_total;
 }
 
 int main()
@@ -117,6 +176,10 @@ int main()
     {
         cout << "Atom " << i << ": x=" << atoms[i].x << ", y=" << atoms[i].y << ", z=" << atoms[i].z << endl;
     }
+
+    double energy = calc_V_i(atoms, atoms[1]);
+    cout<<energy/eV_to_joule;
+
 
     return 0;
 }
