@@ -88,7 +88,7 @@ double calc_bar_B_ij(atom atoms[N], atom i, atom j)
     double zeta_ij = 0;
     for (int it = 0; it<N; it++)
     {   atom k = atoms[it];
-        if (i.r != k.r && j.r != k.r)
+        if (fabs(i.r - k.r) > 1e-10 && fabs(j.r - k.r) > 1e-10)
         {
             atom r_ik = {k.x - i.x, k.y - i.y, k.z - i.z, 0, 0, 0};
             convertToSpherical(r_ik);
@@ -99,7 +99,7 @@ double calc_bar_B_ij(atom atoms[N], atom i, atom j)
     double zeta_ji = 0;
     for (int it = 0; it<N; it++)
     {   atom k = atoms[it];
-        if (i.r != k.r && j.r != k.r)
+        if (fabs(i.r - k.r) > 1e-10 && fabs(j.r - k.r) > 1e-10)
         {
             atom r_jk = {k.x - j.x, k.y - j.y, k.z - j.z, 0, 0, 0};
             convertToSpherical(r_jk);
@@ -125,14 +125,18 @@ double calc_V_A(double r)
     return VA;
 }
 
-double calc_V_i(atom atoms[N], atom i)
+double calc_V_i(atom atoms[N], atom i, int atom_index)
 {
     double Vi = 0;
     for (int it = 0; it<N; it++)
     {
-        atom j = atoms[it];
-        double rij = sqrt(pow(j.x - i.x, 2) + pow(j.y - i.y, 2) + pow(j.z - i.z, 2));
-        Vi += calc_f_cut(rij)*(calc_V_R(rij) - calc_bar_B_ij(atoms, i, j)*calc_V_A(rij));
+        if (atom_index != it)
+        {
+            atom j = atoms[it];
+            double rij = sqrt(pow(j.x - i.x, 2) + pow(j.y - i.y, 2) + pow(j.z - i.z, 2));
+            cout<<rij<<" "<<Vi<<" "<<calc_f_cut(rij)<<" "<<calc_V_R(rij)<<" "<<calc_bar_B_ij(atoms, i, j)<<" "<<calc_V_A(rij)<<endl;
+            Vi += calc_f_cut(rij)*(calc_V_R(rij) - calc_bar_B_ij(atoms, i, j)*calc_V_A(rij));
+        }
     }
 
     return Vi;
@@ -144,9 +148,33 @@ double calc_total_V(atom atoms[N])
      for (int it = 0; it<N; it++)
     {
         atom i = atoms[it];
-        V_total += calc_V_i(atoms, i);
+        V_total += calc_V_i(atoms, i, it);
     }
-    return V_total;
+    return V_total/2;
+}
+
+void f_corelation(atom atoms[N], double *pcf, int M)
+{
+    double r_sr = 0;
+    for (int i = 0; i < N; i++)
+    {
+        r_sr += atoms[i].r;
+    }
+    r_sr /= N;
+    double r_max = 2.5*r_sr;
+    double dr = r_max/M;
+
+    for (int it = 0; it<N; it++)
+    {
+        for (int it2 = it + 1; it2<N; it2++)
+        {
+            atom i = atoms[it];
+            atom j = atoms[it2];
+            double rij = sqrt(pow(j.x - i.x, 2) + pow(j.y - i.y, 2) + pow(j.z - i.z, 2));
+            int m = floor(rij/dr);
+            if(m<M) pcf[m] += (8*M_PI*r_sr*r_sr)/(N*N*2*M_PI*rij*dr);
+        }
+    }
 }
 
 int main()
@@ -163,22 +191,35 @@ int main()
         return 1;
     }
 
-    for (int i = 0; i<60; i++)
+    for (int i = 0; i<N; i++)
     {
         plik1>>atoms[i].x>>atoms[i].y>>atoms[i].z;
-        convertToSpherical(atoms[i]);
-        
+        atoms[i].x *= angstrom_to_meter;
+        atoms[i].y *= angstrom_to_meter;
+        atoms[i].z *= angstrom_to_meter;
+        convertToSpherical(atoms[i]);  
     }
 
     plik1.close();
 
-    for (int i = 0; i < 60; i++)
+    for (int i = 0; i < N; i++)
     {
         cout << "Atom " << i << ": x=" << atoms[i].x << ", y=" << atoms[i].y << ", z=" << atoms[i].z << endl;
     }
 
-    double energy = calc_V_i(atoms, atoms[1]);
-    cout<<energy/eV_to_joule;
+    double test = calc_total_V(atoms);
+    cout<<test/eV_to_joule;
+
+    //Funkcja korealcji par
+    ofstream plik2;
+    plik2.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_8\\pcf_1.txt");
+    int M = 100;
+    double pcf[M];
+    f_corelation(atoms, pcf, M);
+    for (int i = 0; i<M; i++)
+    {
+        plik2<<i<<" "<<pcf[i]<<endl;
+    }
 
 
     return 0;
