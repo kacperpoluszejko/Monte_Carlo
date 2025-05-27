@@ -10,27 +10,8 @@
 
 using namespace std;
 
-
-class RandomNumberGenerator 
-{
-    private:
-        std::random_device rd;
-        std::mt19937 gen;
-        std::uniform_real_distribution<double> dist;
-    
-    public:
-        RandomNumberGenerator()
-            : gen(rd()), dist(0.0, 1.0) {}
-
-        double get_random() { 
-            return dist(gen);
-        }
-};
-
-
 int main()
 {
-    RandomNumberGenerator rn;
     int nx = 30, ny = 30, VL = 1, VT = -1, VB = -1, eps = 1, pmax = 1;
     double Delta = 0.1;
     double xmax = Delta*nx, ymax = Delta*ny, sigma_p = xmax/10;
