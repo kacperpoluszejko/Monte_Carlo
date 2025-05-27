@@ -64,6 +64,18 @@ int main()
         cout<<abs((F_new - F_old)/(F_new))<<endl;
     }
     
+    ofstream plik1;
+    plik1.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_2.txt");
+
+    for (int j = 0; j<=nx; j++)
+    {
+        for (int i = 0; i<=ny; i++)
+        {
+            plik1<<V[i][j]<<" ";
+        }
+        plik1<<endl;
+    }
+
 
     return 0;
 }

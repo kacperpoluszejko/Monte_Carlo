@@ -58,10 +58,13 @@ int main()
     for (int j = 0; j<=ny; j++)
     {
         V[0][j] = VL * sin(M_PI*Delta*j/ymax);
+        B[0][j] = 1;
         for (int i = 0; i<=nx; i++)
         {
             V[i][0] = VB*sin(M_PI*Delta*i/xmax);
             V[i][ny] = VT*sin(M_PI*Delta*i/xmax);
+            B[i][0] = 1;
+            B[i][ny] = 1;
         }
     }
 
@@ -78,8 +81,7 @@ int main()
                     double g = 0;
                     for (int n = 1; n<=n_length; n++)
                     {
-                        double U = rn.get_random();
-                        int m = floor(rn.get_random()*U);
+                        int m = floor(rn.get_random()*4);
                         if (m == 0) i--;
                         else if (m == 1) i++;
                         else if (m == 2) j--;
@@ -104,6 +106,40 @@ int main()
                 S[i0][j0] = k_chains/N_chains;
             }
         }
+
+    ofstream plik1;
+    plik1.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_1.txt");
+    ofstream plik2;
+    plik2.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_1_sigma.txt");
+    ofstream plik3;
+    plik3.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_1_chains.txt");
+
+    for (int j = 0; j<=nx; j++)
+    {
+        for (int i = 0; i<=ny; i++)
+        {
+            plik1<<V[i][j]<<" ";
+        }
+        plik1<<endl;
+    }
+
+    for (int j = 0; j<=nx; j++)
+    {
+        for (int i = 0; i<=ny; i++)
+        {
+            plik2<<sigma_V[i][j]<<" ";
+        }
+        plik2<<endl;
+    }
+
+    for (int j = 0; j<=nx; j++)
+    {
+        for (int i = 0; i<=ny; i++)
+        {
+            plik3<<S[i][j]<<" ";
+        }
+        plik3<<endl;
+    }
 
     return 0;
 }
