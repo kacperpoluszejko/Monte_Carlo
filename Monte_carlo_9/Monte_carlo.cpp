@@ -43,7 +43,7 @@ int main()
     double S[nx+1][ny+1] = {0};
 
     //Parametry do zmiany dla 3 przypadków z polecenia
-    int N_chains = 100, n_length = 100;
+    double N_chains = 300, n_length = 300;
 
     int itmax = 10000;
 
@@ -74,7 +74,7 @@ int main()
             for (int j0 = 1; j0<ny; j0++)
             {
                 double sum_V1 = 0, sum_V2 = 0;
-                int k_chains = 0;
+                double k_chains = 0;
                 for (int N = 1; N<=N_chains; N++)
                 {
                     int i = i0, j = j0;
@@ -102,17 +102,17 @@ int main()
                 double V2 = sum_V2/k_chains;
                 V[i0][j0] = V1;
                 sigma_V[i0][j0] = sqrt((V2 - V1*V1)/(k_chains));
-                B[i0][j0] = 0; // PRZYPADEK 1
+                B[i0][j0] = 1; // PRZYPADEK 1
                 S[i0][j0] = k_chains/N_chains;
             }
         }
 
     ofstream plik1;
-    plik1.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_1.txt");
+    plik1.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_5.txt");
     ofstream plik2;
-    plik2.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_1_sigma.txt");
+    plik2.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_5_sigma.txt");
     ofstream plik3;
-    plik3.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_1_chains.txt");
+    plik3.open("C:\\Users\\kacpe\\OneDrive\\Pulpit\\C_plus\\Monte_Carlo\\Monte_carlo_9\\monte_carlo_9_5_chains.txt");
 
     for (int j = 0; j<=nx; j++)
     {
