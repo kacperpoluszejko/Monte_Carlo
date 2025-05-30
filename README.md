@@ -20,3 +20,4 @@ Każdy projekt zawiera:
  6. Symulacja dyfuzji i absorpcji w układzie zakmniętym
  7. Równanie typu Master: algorytm Gillespie
  8. Modelowanie struktury fullerenów metodą symulowanego wyżarzania
+ 9. Rozwiązywanie równania Poissona na siatce metodą błądzenia przypadkowego
