@@ -21,3 +21,4 @@ Każdy projekt zawiera:
  7. Równanie typu Master: algorytm Gillespie
  8. Modelowanie struktury fullerenów metodą symulowanego wyżarzania
  9. Rozwiązywanie równania Poissona na siatce metodą błądzenia przypadkowego
+ 10. Równania całkowe - propagacja sygnału elektrycznego linii transmisyjnej
