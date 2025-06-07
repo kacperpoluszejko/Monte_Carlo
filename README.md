@@ -22,3 +22,4 @@ Każdy projekt zawiera:
  8. Modelowanie struktury fullerenów metodą symulowanego wyżarzania
  9. Rozwiązywanie równania Poissona na siatce metodą błądzenia przypadkowego
  10. Równania całkowe - propagacja sygnału elektrycznego linii transmisyjnej
+ 11. Modelowanie rozpraszania fotonów w materiale częściowo przezroczystym
