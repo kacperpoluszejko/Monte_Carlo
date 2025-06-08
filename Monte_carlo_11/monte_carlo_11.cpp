@@ -628,18 +628,18 @@ int main()
     ob.dx_detect=0.01;
     ob.nx=100;
     ob.ny=100;
-    ob.rx0=0.8;
-    ob.ry0=0.6;
+    ob.rx0=0.0;
+    ob.ry0=1.0;
     ob.nlayers=3;
 
     ob.layers_data[1][0]=1.; //absorption
     ob.layers_data[1][1]=10.; //scattering
     ob.layers_data[1][2]=0.02; //width
     ob.layers_data[1][3]=0.75; //g_anizo
-    ob.layers_data[1][4]=1.3; //n_refraction
+    ob.layers_data[1][4]=1.0; //n_refraction
 
-    ob.layers_data[2][0]=1.; //absorption
-    ob.layers_data[2][1]=190.; //scattering
+    ob.layers_data[2][0]=10.; //absorption
+    ob.layers_data[2][1]=210.; //scattering
     ob.layers_data[2][2]=0.02; //width
     ob.layers_data[2][3]=0.75; //g_anizo
     ob.layers_data[2][4]=1.5; //n_refraction
@@ -651,7 +651,7 @@ int main()
     ob.layers_data[3][4]=1.0; //n_refraction
 
     ob.init();
-    int N=1000000;
+    int N=2000000;
     ob.write_all_paths=0;
     ob.write_source_detection_paths=0;
     for(int k=0;k<N;k++){
@@ -667,7 +667,28 @@ int main()
     }
     out.close();
 
-    
+    double A = 0.0;
+	for (int i = 0; i <= ob.nx; ++i) {
+		for (int j = 0; j <= ob.ny; ++j) {
+			A += ob.absorption[i][j];
+		}
+	}
+	A = A/N;
+
+	double R = 0.0;
+	for (int i = 0; i <= ob.nx; ++i) {
+		R += ob.reflectance[i];
+	}
+	R = R/N;
+
+	double T = 0.0;
+	for (int i = 0; i <= ob.nx; ++i) {
+		T += ob.transmittance[i];
+	}
+	T = T/N;
+
+	double S = A + R + T;
+	std::cout << "A = " << A << "\nR = " << R << "\nT = " << T << "\nSUM = " << S << std::endl;
 
 
     return 0;
