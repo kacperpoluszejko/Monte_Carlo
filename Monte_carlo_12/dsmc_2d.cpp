@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include <random>
 #include <omp.h>
@@ -9,6 +10,8 @@
 #include <string>
 #include <cstdlib>
 #include <filesystem>
+#include <math.h>
+
 
 using namespace std;
 
@@ -242,7 +245,12 @@ void DSMC_2D::evolution(double time_max,int nit){
 		it++;
 		time(&czas2);
 		czas=difftime(czas2,czas1);
-		
+		// if (it % 100 == 0) {
+		// 	string hist_filename = "hist_" + to_string(it) + ".dat";
+		// 	hist_velocity_all(hist_filename.c_str(), 5.0, 50);
+		// }
+
+
 		hist_velocity_all("hist3.dat",5.0,50);
 		
 		
