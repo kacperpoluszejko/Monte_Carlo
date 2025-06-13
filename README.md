@@ -23,3 +23,4 @@ Każdy projekt zawiera:
  9. Rozwiązywanie równania Poissona na siatce metodą błądzenia przypadkowego
  10. Równania całkowe - propagacja sygnału elektrycznego linii transmisyjnej
  11. Modelowanie rozpraszania fotonów w materiale częściowo przezroczystym
+ 12. Symulacja dynamiki gazu część 1
