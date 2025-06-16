@@ -24,3 +24,4 @@ Każdy projekt zawiera:
  10. Równania całkowe - propagacja sygnału elektrycznego linii transmisyjnej
  11. Modelowanie rozpraszania fotonów w materiale częściowo przezroczystym
  12. Symulacja dynamiki gazu część 1
+ 13. Symulacja dynamiki gazu część 2
