@@ -25,3 +25,4 @@ Każdy projekt zawiera:
  11. Modelowanie rozpraszania fotonów w materiale częściowo przezroczystym
  12. Symulacja dynamiki gazu część 1
  13. Symulacja dynamiki gazu część 2
+ 14. Kwantowa metoda wariacyjna
