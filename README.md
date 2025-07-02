@@ -1,6 +1,6 @@
 # 🎲 Symulacje Monte Carlo
 
-To repozytorium zawiera zestaw programów i analiz związanych z metodami Monte Carlo, realizowanych w ramach studiów magisterskich na kierunku **Fizyka Techniczna** (specjalizacja: **Fizyka Komputerowa**).
+To repozytorium zawiera zestaw programów i analiz związanych z metodami Monte Carlo, realizowanych w ramach studiów magisterskich na kierunku **Fizyka Techniczna** (specjalizacja: **Fizyka Komputerowa**)
 
 Każdy projekt zawiera:
 - Kod źródłowy symulacji
