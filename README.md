@@ -1,6 +1,6 @@
 # 🎲 Monte Carlo Simulations
 
-This repository contains a set of programs and analyses related to **Monte Carlo methods**, developed as part of the Master's studies in **Technical Physics** (specialization: **Computational Physics**)
+This repository contains a set of programs and analyses related to **Monte Carlo methods**, developed as part of the Master's studies in **Technical Physics** (specialization: **Computational Physics**).
 
 Each project includes:
 - Source code of the simulation  
